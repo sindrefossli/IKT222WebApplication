@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>2FA Setup</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .qr-code img {
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Two-Factor Authentication Setup</h1>
+    <div class="qr-code">
+        <p>Scan this QR code with your authenticator app:</p>
+        <img src="data:image/png;base64,{{ qr_code_base64 }}" alt="QR Code">
+    </div>
+
+    <h2>Enter TOTP Code</h2>
+    <form action="{{ url_for('verify_2fa') }}" method="post">
+        <div class="form-group">
+            <label for="totp_code">6-digit Code:</label>
+            <input type="text" id="totp_code" name="totp_code" required>
+        </div>
+        <button type="submit">Verify</button>
+    </form>
+</body>
+</html>

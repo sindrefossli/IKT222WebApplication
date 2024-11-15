@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <style>
+        /* Styling for buttons */
+        .btn {
+            padding: 10px 20px;
+            margin: 5px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+        /* Styling for the product list */
+        .product {
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-bottom: 15px;
+        }
+        .product h3 {
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to the Home Page</h1>
+
+    <!-- Product List -->
+    <h2>Our Products:</h2>
+    <div>
+        {% for product in products %}
+            <div class="product">
+                <h3>{{ product.name }}</h3>
+                <p>{{ product.description }}</p>
+                <p><strong>Stock:</strong> {{ product.stock }}</p>
+            </div>
+        {% endfor %}
+    </div>
+
+    {% if logged_in %}
+        <p>You are logged in!</p>
+        <button class="btn" onclick="window.location.href='{{ url_for('myAccount') }}'">My Account</button>
+        <button class="btn" style="background-color: #dc3545;" onclick="window.location.href='{{ url_for('logout') }}'">Logout</button>
+
+        {% if user_role_id == 1 %}  <!-- Check if user is admin -->
+            <button class="btn" onclick="window.location.href='{{ url_for('inventoryManagement') }}'">Inventory Management</button>
+        {% endif %}
+    {% else %}
+        <p>You are not logged in.</p>
+        <button class="btn" onclick="window.location.href='{{ url_for('register') }}'">Register</button>
+        <button class="btn" onclick="window.location.href='{{ url_for('login') }}'">Login</button>
+    {% endif %}
+</body>
+</html>

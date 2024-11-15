@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Verify TOTP</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .form-group {
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Enter TOTP Code</h1>
+    <form action="{{ url_for('verify_totp_login') }}" method="post">
+        <div class="form-group">
+            <label for="totp_code">6-digit Code:</label>
+            <input type="text" id="totp_code" name="totp_code" required>
+        </div>
+        <button type="submit">Verify</button>
+    </form>
+</body>
+</html>

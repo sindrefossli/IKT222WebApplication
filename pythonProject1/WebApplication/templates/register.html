@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/register_styling.css') }}">
+</head>
+<body>
+    <h2>Register</h2>
+    <form method="POST">
+        <label for="username">Name:</label>
+        <input type="text" id="username" name="username" maxlength="150" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" maxlength="150" required>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+
+        <button type="submit">Register Account</button>
+    </form>
+
+    <a href="{{ url_for('login') }}">Already have an account? Login here</a>
+    <!-- Change to a link (anchor tag) instead of a button -->
+    <a href="{{ url_for('register_with_google') }}" class="google-link">Register with Google</a>
+</body>
+</html>

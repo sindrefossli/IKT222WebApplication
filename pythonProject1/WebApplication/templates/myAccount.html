@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Account</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/myAccount_styles.css') }}">
+    <script>
+        function toggleEdit() {
+            const editSection = document.getElementById('editSection');
+            const viewSection = document.getElementById('viewSection');
+            editSection.style.display = editSection.style.display === 'none' ? 'block' : 'none';
+            viewSection.style.display = viewSection.style.display === 'none' ? 'block' : 'none';
+        }
+    </script>
+</head>
+<body>
+    <h1>My Account</h1>
+    <div id="viewSection">
+        <p><strong>Email:</strong> {{ user.email }}</p>
+        <p><strong>Name:</strong> {{ user.username }}</p>
+        <p><strong>Address:</strong>
+            {% if user.address %}
+                {{ user.address }}
+            {% else %}
+                <em>No address available.</em>
+            {% endif %}
+        </p>
+        <button onclick="toggleEdit()">Edit Account</button>
+    </div>
+
+    <div id="editSection" style="display: none;">
+        <h2>Edit Account</h2>
+        <form method="POST" action="{{ url_for('myAccount') }}">
+            <label for="username">Name:</label>
+            <input type="text" name="username" id="username" value="{{ user.username }}" required>
+            <br>
+            <label for="address">Address:</label>
+            <textarea id="address" name="address" placeholder="Write your address here...">{{ user.address }}</textarea>
+            <br>
+            <button type="submit" class="save-changes-btn">Save Changes</button>
+            <button type="button" onclick="toggleEdit()">Cancel</button>
+        </form>
+    </div>
+
+
+  <button class="btn" style="background-color: #28a745;" onclick="window.location.href='{{ url_for('home') }}'">Home</button>
+  <button class="btn" style="background-color: #dc3545;" onclick="window.location.href='{{ url_for('logout') }}'">Logout</button>
+
+
+
+</body>
+</html>
